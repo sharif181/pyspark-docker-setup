@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  spark:
+    build: .
+    container_name: pyspark-container
+    volumes:
+      - ./app:/app
+    environment:
+      - SPARK_HOME=/usr/local/spark
+      - JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+    command: python /app/main.py
+    networks:
+      - spark-net
+
+networks:
+  spark-net:
+    driver: bridge
